@@ -24,25 +24,23 @@ const DotGrid = () => {
     animationRef.current = anime({
       targets: '.dot-point',
       scale: [
-        { value: 0.8, easing: 'easeOutSine', duration: 500 },
-        { value: 1.2, easing: 'easeOutSine', duration: 500 },
-        { value: 1, easing: 'easeInOutQuad', duration: 1000 },
+        { value: 1.2, easing: 'easeOutSine', duration: 400 },
+        { value: 1, easing: 'easeInOutQuad', duration: 800 },
       ],
       translateY: [
-        { value: 10, easing: 'easeOutSine', duration: 500 },
-        { value: -10, easing: 'easeOutSine', duration: 500 },
-        { value: 0, easing: 'easeInOutQuad', duration: 1000 },
+        { value: -15, easing: 'easeOutSine', duration: 400 },
+        { value: 0, easing: 'easeInOutQuad', duration: 800 },
       ],
       opacity: [
-        { value: 0.8, easing: 'easeOutSine', duration: 500 },
-        { value: 1, easing: 'easeOutSine', duration: 500 },
-        { value: 0.5, easing: 'easeInOutQuad', duration: 1000 },
+        { value: 1, easing: 'easeOutSine', duration: 400 },
+        { value: 0.5, easing: 'easeInOutQuad', duration: 800 },
       ],
       loop: true, // Loop the animation infinitely
       delay: anime.stagger(100, {
         grid: [GRID_WIDTH, GRID_HEIGHT],
         from: 'center',
       }),
+      direction: 'alternate', // Alternate the direction of animation
     });
   };
 
