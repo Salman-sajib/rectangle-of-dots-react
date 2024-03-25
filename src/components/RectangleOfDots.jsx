@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import anime from 'animejs';
 
 const WaterDropGrid = () => {
@@ -9,8 +9,8 @@ const WaterDropGrid = () => {
   );
 };
 
-const GRID_WIDTH = 25;
-const GRID_HEIGHT = 20;
+const GRID_WIDTH = 30;
+const GRID_HEIGHT = 25;
 
 const DotGrid = () => {
   const animationRef = useRef(null);
@@ -63,7 +63,7 @@ const DotGrid = () => {
           key={`${i}-${j}`}
         >
           <div
-            className='dot-point size-2 rounded-full bg-gradient-to-b from-slate-700 to-slate-400 opacity-50'
+            className='dot-point size-2 rounded-full bg-gradient-to-b from-[#9be15d] to-[#00e3ae] opacity-50'
             data-index={index}
           />
         </div>
