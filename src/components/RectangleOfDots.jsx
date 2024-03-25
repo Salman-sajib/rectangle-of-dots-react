@@ -1,14 +1,6 @@
 import { useEffect, useRef } from 'react';
 import anime from 'animejs';
 
-const WaterDropGrid = () => {
-  return (
-    <div>
-      <DotGrid />
-    </div>
-  );
-};
-
 const GRID_WIDTH = 30;
 const GRID_HEIGHT = 25;
 
@@ -32,7 +24,7 @@ const DotGrid = () => {
     animationRef.current = anime({
       targets: '.dot-point',
       scale: [
-        { value: 1.35, easing: 'easeOutSine', duration: 500 },
+        { value: 1.2, easing: 'easeOutSine', duration: 500 },
         { value: 1, easing: 'easeInOutQuad', duration: 1000 },
       ],
       translateY: [
@@ -78,6 +70,14 @@ const DotGrid = () => {
       className='grid gap-3 w-fit'
     >
       {dots}
+    </div>
+  );
+};
+
+const WaterDropGrid = () => {
+  return (
+    <div>
+      <DotGrid />
     </div>
   );
 };
