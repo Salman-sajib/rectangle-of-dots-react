@@ -1,46 +1,85 @@
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import anime from 'animejs';
 
-// the dots component
-function Dot() {
+const WaterDropGrid = () => {
   return (
-    <div
-      style={{
-        width: '7px',
-        height: '7px',
-        backgroundColor: '#cbd5e1',
-        borderRadius: '50%',
-        background: 'linear-gradient(120deg, #f093fb 0%, #f5576c 100%)',
-      }}
-    ></div>
+    <div>
+      <DotGrid />
+    </div>
   );
-}
+};
 
-// the grid with the dots
-function DotGrid({ rows, cols }) {
-  const grid = [];
+const GRID_WIDTH = 25;
+const GRID_HEIGHT = 20;
 
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      grid.push(<Dot key={`${i}-${j}`} />);
+const DotGrid = () => {
+  const animationRef = useRef(null);
+
+  useEffect(() => {
+    // Start the animation when component mounts
+    startAnimation();
+
+    // Cleanup function to stop the animation when component unmounts
+    return () => {
+      if (animationRef.current) {
+        animationRef.current.pause();
+      }
+    };
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
+  const startAnimation = () => {
+    // Start the animation
+    animationRef.current = anime({
+      targets: '.dot-point',
+      scale: [
+        { value: 1.35, easing: 'easeOutSine', duration: 500 },
+        { value: 1, easing: 'easeInOutQuad', duration: 1000 },
+      ],
+      translateY: [
+        { value: -15, easing: 'easeOutSine', duration: 500 },
+        { value: 0, easing: 'easeInOutQuad', duration: 1000 },
+      ],
+      opacity: [
+        { value: 1, easing: 'easeOutSine', duration: 500 },
+        { value: 0.5, easing: 'easeInOutQuad', duration: 1000 },
+      ],
+      loop: true, // Loop the animation infinitely
+      delay: anime.stagger(100, {
+        grid: [GRID_WIDTH, GRID_HEIGHT],
+        from: 'center',
+      }),
+    });
+  };
+
+  const dots = [];
+  let index = 0;
+
+  for (let i = 0; i < GRID_WIDTH; i++) {
+    for (let j = 0; j < GRID_HEIGHT; j++) {
+      dots.push(
+        <div
+          className='rounded-full transition-colors hover:bg-slate-600'
+          data-index={index}
+          key={`${i}-${j}`}
+        >
+          <div
+            className='dot-point size-2 rounded-full bg-gradient-to-b from-slate-700 to-slate-400 opacity-50'
+            data-index={index}
+          />
+        </div>
+      );
+      index++;
     }
   }
 
   return (
     <div
-      style={{
-        display: 'grid',
-        gap: '10px',
-        gridTemplateColumns: `repeat(${cols},7px)`,
-        gridTemplateRows: `repeat(${rows}, 7px)`,
-      }}
+      style={{ gridTemplateColumns: `repeat(${GRID_WIDTH}, 1fr)` }}
+      className='grid gap-3 w-fit'
     >
-      {grid}
+      {dots}
     </div>
   );
-}
+};
 
-function RectangleOfDots() {
-  return <DotGrid rows={20} cols={30} />;
-}
-
-export default RectangleOfDots;
+export default WaterDropGrid;
