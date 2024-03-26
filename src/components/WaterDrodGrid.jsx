@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import anime from 'animejs';
 
-const GRID_WIDTH = 25;
-const GRID_HEIGHT = 20;
+const GRID_WIDTH = 35;
+const GRID_HEIGHT = 25;
 
 const DotGrid = () => {
   const animationRef = useRef(null);
@@ -17,7 +17,7 @@ const DotGrid = () => {
         animationRef.current.pause();
       }
     };
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+  }, []);
 
   const startAnimation = () => {
     // Start the animation
@@ -56,7 +56,7 @@ const DotGrid = () => {
           key={`${i}-${j}`}
         >
           <div
-            className='dot-point size-2 rounded-full bg-gradient-to-b from-[#c471f5] to-[#fa71cd] opacity-50'
+            className='dot-point size-[.4rem] rounded-full bg-gradient-to-b from-[#c471f5] to-[#fa71cd] opacity-50'
             data-index={index}
           />
         </div>

@@ -1,10 +1,10 @@
 import './App.css';
-import RectangleOfDots from './components/RectangleOfDots';
+import WaterDropGrid from './components/WaterDrodGrid';
 
 function App() {
   return (
     <div className=' bg-slate-900 min-h-dvh grid place-content-center overflow-hidden'>
-      <RectangleOfDots />
+      <WaterDropGrid />
     </div>
   );
 }
